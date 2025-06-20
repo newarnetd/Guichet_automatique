@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Protest+Strike&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Mono+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Ultra&family=Viga&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Faculty+Glyphic&family=Gruppo&family=Italianno&family=League+Gothic&family=Merienda:wght@300..900&family=Saira+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Titan+One&family=Yatra+One&display=swap');
+:root {
+    --ViewPortHeight: 100vh;
+    --ViewPortWidth: 100vw;
+    --couleur-principale: #000;
+    --couleur-secondaire: #ffffff;
+    
+    --couleur-fond-principal: #F9F9F9;
+    --couleur-fond-secondaire: #E5E5E5;
+    
+    
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none; 
+  -webkit-user-select: none;
+  -moz-user-select: none; 
+  -ms-user-select: none;
+}
+*::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+*::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+body, html {
+    width: 100%;
+    overflow-x:hidden ;
+    height: var(--ViewPortHeight);
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    color: var(--couleur-texte-principal);
+    background: var(--couleur-fond-principal);
+}
