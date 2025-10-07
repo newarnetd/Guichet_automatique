@@ -2,9 +2,9 @@
 session_start();
 
 $host = "localhost";
-$user = "u331909252_CkfJY";
-$password = "P#MK|0Phg4"; 
-$dbname = "u331909252_t5z3E";
+$user = "root";
+$password = ""; 
+$dbname = "guichet_automatique";
 $conn = new mysqli($host, $user, $password, $dbname);
 
 if ($conn->connect_error) {
@@ -118,6 +118,17 @@ function getStatusBadge($status) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="Fonts.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png" />
     <style>
         body { 
             background-color: #f8f9fa; 
@@ -183,93 +194,51 @@ function getStatusBadge($status) {
 
 <div class="d-flex">
     <!-- Sidebar -->
-    <div class="sidebar p-3" style="width: 250px;">
-        <div class="text-center mb-4">
-            <h4 class="text-white mb-0">
-                <i class="bi bi-shield-check me-2"></i>Admin Panel
-            </h4>
-        </div>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="admin.php">
-                    <i class="bi bi-speedometer2 me-2"></i>Tableau de Bord
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="add.php">
-                    <i class="bi bi-people-fill me-2"></i>Utilisateurs
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="pages/historique.php">
-                    <i class="bi bi-clock-history me-2"></i>Historique
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="addGuichet.php">
-                    <i class="bi bi-shop-window me-2"></i>Guichets
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Paramètres.php">
-                    <i class="bi bi-sliders me-2"></i>Paramètres
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="corbeiller.php">
-                    <i class="bi bi-trash me-2"></i>Corbeille
-                </a>
-            </li>
-            <hr class="text-white-50">
-            <li class="nav-item">
-                <a class="nav-link" href="pages/logout.php" onclick="return confirm('Êtes-vous sûr de vouloir vous déconnecter ?');">
-                    <i class="bi bi-box-arrow-right me-2"></i>Déconnexion
-                </a>
-            </li>
-        </ul>
-    </div>
+<?php include('sidebar.php')?>
+
 
     <!-- Main Content -->
-    <div class="flex-grow-1 p-4">
+    <div class="flex-grow-1 p-4" style="width: 80vw;">
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 class="mb-0">Tableau de Bord</h2>
-                <p class="text-muted mb-0">Gestion du système bancaire</p>
+                <h2 class="mb-0 kaushan-script">Tableau de Bord</h2>
+                <p class="text-muted mb-0 moon-dance-regular" style="font-size: 25px !important;">Gestion du système bancaire</p>
             </div>
             <div class="text-end">
-                <small class="text-muted">Connecté en tant que: <?= htmlspecialchars($_SESSION['user_name'] ?? 'Admin') ?></small>
+                <small class="text-muted moon-dance-regular" style="font-size: 25px !important;">Connecté en tant que: <?= htmlspecialchars($_SESSION['user_name'] ?? 'Admin') ?></small>
                 <br>
-                <small class="text-muted"><?= date('d/m/Y H:i') ?></small>
+                <small class="text-muted moon-dance-regular" style="font-size: 18px !important;"><?= date('d/m/Y H:i') ?></small>
             </div>
         </div>
 
         <!-- Quick Actions -->
         <div class="quick-actions mb-4">
-            <h5 class="mb-3"><i class="bi bi-lightning-fill me-2"></i>Actions Rapides</h5>
-            <div class="row g-2">
-                <div class="col-md-3">
-                    <a href="add.php" class="btn btn-primary w-100">
-                        <i class="bi bi-person-plus-fill me-1"></i> Nouvel Utilisateur
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="addGuichet.php" class="btn btn-success w-100">
-                        <i class="bi bi-shop-window me-1"></i> Nouveau Guichet
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="pages/historique.php" class="btn btn-info w-100">
-                        <i class="bi bi-clock-history me-1"></i> Voir Historique
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="corbeiller.php" class="btn btn-warning w-100">
-                        <i class="bi bi-trash-fill me-1"></i> Corbeille
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class="row g-2">
+    <div class="col-md-3">
+        <a href="add.php" class="btn w-100 btn stats-card">
+            <i class="bi bi-person-plus-fill me-1"></i> Nouvel Utilisateur
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="addGuichet.php" class="btn w-100 text-dark" style="background-color: #d6d8db;">
+            <i class="bi bi-shop-window me-1"></i> Nouveau Guichet
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="pages/historique.php" class="btn w-100 stats-card">
+            <i class="bi bi-clock-history me-1"></i>Historique
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="corbeiller.php" class="btn w-100 text-dark" style="background-color: #bfc3c7;">
+            <i class="bi bi-trash-fill me-1"></i> Corbeille
+        </a>
+    </div>
+</div>
+
+</div>
+
 
         <?php if (isset($error_message)): ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -282,38 +251,49 @@ function getStatusBadge($status) {
         <?php if (isset($activitiesResult) && $activitiesResult->num_rows > 0): ?>
         <div class="card mb-4">
             <div class="card-header bg-transparent">
-                <h5 class="card-title mb-0">
+                <h5 class="card-title mb-0 kaushan-script">
                     <i class="bi bi-activity me-2"></i>Activités Récentes
                 </h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Date & Heure</th>
-                                <th>Événement</th>
-                                <th>Message</th>
-                                <th>Client</th>
-                                <th>Guichet</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php while ($activity = $activitiesResult->fetch_assoc()): ?>
-                            <tr>
-                                <td>
-                                    <small class="text-muted"><?= tempsRelatif($activity['dateHeure']) ?></small>
-                                </td>
-                                <td>
-                                    <span class="badge bg-primary"><?= htmlspecialchars($activity['typeEvenement']) ?></span>
-                                </td>
-                                <td><?= htmlspecialchars($activity['message']) ?></td>
-                                <td><?= htmlspecialchars(trim($activity['client_nom'] . ' ' . $activity['client_prenom'])) ?></td>
-                                <td><?= htmlspecialchars($activity['guichet_nom'] ?? 'Non spécifié') ?></td>
-                            </tr>
-                            <?php endwhile; ?>
-                        </tbody>
-                    </table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Événement</th>
+            <th>Message</th>
+            <th>Client</th>
+            <th>Guichet</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php while ($activity = $activitiesResult->fetch_assoc()): ?>
+        <tr>
+            <td>
+                <small class="text-muted"><?= tempsRelatif($activity['dateHeure']) ?></small>
+            </td>
+            <td>
+                <span class="badge bg-primary"><?= htmlspecialchars($activity['typeEvenement']) ?></span>
+            </td>
+            <td>
+                <?php 
+                    $msg = htmlspecialchars($activity['message']);
+                    $shortMsg = strlen($msg) > 50 ? substr($msg, 0, 50) . '...' : $msg;
+                ?>
+                <span class="message-text" style="cursor: pointer;" 
+                      data-full="<?= $msg ?>" 
+                      data-short="<?= $shortMsg ?>">
+                    <?= $shortMsg ?>
+                </span>
+            </td>
+            <td><?= htmlspecialchars(trim($activity['client_nom'] . ' ' . $activity['client_prenom'])) ?></td>
+            <td><?= htmlspecialchars($activity['guichet_nom'] ?? 'Non spécifié') ?></td>
+        </tr>
+        <?php endwhile; ?>
+    </tbody>
+</table>
+
                 </div>
             </div>
         </div>
@@ -323,7 +303,7 @@ function getStatusBadge($status) {
         <?php if (isset($usersResult) && $usersResult->num_rows > 0): ?>
         <div class="card mb-4">
             <div class="card-header bg-transparent">
-                <h5 class="card-title mb-0">
+                <h5 class="card-title mb-0 kaushan-script">
                     <i class="bi bi-people-fill me-2"></i>Clients du Système
                     <span class="badge bg-secondary ms-2"><?= $usersResult->num_rows ?></span>
                 </h5>
@@ -377,7 +357,7 @@ function getStatusBadge($status) {
         <?php if (isset($adminsResult) && $adminsResult->num_rows > 0): ?>
         <div class="card">
             <div class="card-header bg-transparent">
-                <h5 class="card-title mb-0">
+                <h5 class="card-title mb-0 kaushan-script">
                     <i class="bi bi-shield-fill-check me-2"></i>Administrateurs du Système
                     <span class="badge bg-danger ms-2"><?= $adminsResult->num_rows ?></span>
                 </h5>
@@ -463,27 +443,45 @@ function getStatusBadge($status) {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-// Auto-hide alerts after 5 seconds
-document.addEventListener('DOMContentLoaded', function() {
-    const alerts = document.querySelectorAll('.alert');
-    alerts.forEach(alert => {
-        setTimeout(() => {
-            const bsAlert = new bootstrap.Alert(alert);
-            bsAlert.close();
-        }, 5000);
+    // Initialiser les tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
     });
-});
 
-// Confirm before navigation to destructive actions
-document.querySelectorAll('a[href*="supprimer"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-        if (!confirm('Cette action est irréversible. Continuer ?')) {
-            e.preventDefault();
+    function showImageModal(photoPath, fullName, email, matricule, status) {
+        // Mettre à jour les informations textuelles
+        document.getElementById('modalAdminName').textContent = fullName;
+        document.getElementById('modalAdminEmail').textContent = email;
+        document.getElementById('modalAdminMatricule').textContent = matricule;
+        
+        // Mettre à jour le statut avec la bonne classe CSS
+        const statusElement = document.getElementById('modalAdminStatus');
+        statusElement.textContent = status;
+        statusElement.className = 'status-badge ' + 
+            (status === 'Activé' ? 'status-active' : 
+             status === 'Désactivé' ? 'status-inactive' : 'status-blocked');
+        
+        // Gérer l'affichage de l'image
+        const modalImage = document.getElementById('modalProfileImage');
+        const modalDefaultAvatar = document.getElementById('modalDefaultAvatar');
+        
+        if (photoPath && photoPath.trim() !== '') {
+            modalImage.src = photoPath;
+            modalImage.style.display = 'block';
+            modalDefaultAvatar.style.display = 'none';
+        } else {
+            modalImage.style.display = 'none';
+            modalDefaultAvatar.style.display = 'flex';
+            modalDefaultAvatar.textContent = fullName.split(' ').map(n => n[0]).join('').toUpperCase();
         }
-    });
-});
+        
+        // Afficher le modal
+        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+        modal.show();
+    }
 </script>
 
 </body>

@@ -80,7 +80,7 @@ if ($result && $result->num_rows > 0) {
     <section class="home" id="home">
         <div class="max-width">
            <div class="home-content">
-    <div class="text-2">Construisons notre pays avec le numérique</div>
+    <div class="text-2">Méga projet de fin de cycle</div>
     <div class="text-3"><span class="typing"></span></div>
     <a href="index.php" title="Accéder à l'espace d'administration">
         Se connecter comme Admin
@@ -91,8 +91,8 @@ if ($result && $result->num_rows > 0) {
 </div>
 
         </div>
-        <p class="decription moon-dance-regular">Projet du cours de Web 2  Bujumbura International University</p>
-        <p class="decription right moon-dance-regular">Christine Safi Kibasoba - Web Designer </p>
+        <p class="decription moon-dance-regular">Dans le cadre de mon cursus académique</p>
+        <p class="decription right moon-dance-regular">Jean-luc Kashindi Nestor </p>
     </section>
 
     <section class="about" id="about">
@@ -154,7 +154,7 @@ if ($result && $result->num_rows > 0) {
 </section>
 
     <footer>
-        <p class="moon-dance-regular">Christine Safi Kibasomba - Web Designer</p>
+        <p class="moon-dance-regular">Jean-luc Kashindi Nestor</p>
     
     <div style="margin-top: 10px;">
         <a href="https://www.facebook.com/ChristineSafi" target="_blank" style="margin: 0 10px; color:rgb(255, 255, 255);">
