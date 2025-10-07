@@ -67,11 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($idGuichet <= 0 || !$guichet_exists) {
         $error = "Veuillez sélectionner un guichet automatique valide.";
     } else {
-        // Begin transaction for data integrity
+
         $conn->autocommit(FALSE);
         
         try {
-            // Insert account (without guichet in table, but we'll use it for history)
             $insert = $conn->prepare("INSERT INTO comptebancaire (type, solde, devise, clientId, limite_retrait, statut_compte) VALUES (?, ?, ?, ?, ?, ?)");
             $insert->bind_param("sdsids", $type, $solde, $devise, $clientId, $limite_retrait, $statut_compte);
             
@@ -80,23 +79,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             
             $idCompte = $insert->insert_id;
-            
-            // Generate account number (you might want a more sophisticated numbering system)
             $numeroCompte = str_pad($idCompte, 10, '0', STR_PAD_LEFT);
-            
-            // Update with account number if the column exists
+
             $update = $conn->prepare("UPDATE comptebancaire SET solde = ? WHERE idCompte = ?");
             $update->bind_param("di", $solde, $idCompte);
             $update->execute();
-            
-            // Get guichet location for history message
+
             $guichet_info = $conn->prepare("SELECT localisation FROM guichetautomatique WHERE idGuichet = ?");
             $guichet_info->bind_param("i", $idGuichet);
             $guichet_info->execute();
             $guichet_location = $guichet_info->get_result()->fetch_assoc()['localisation'];
             $guichet_info->close();
-            
-            // Log history
+
             $dateHeure = date('Y-m-d H:i:s');
             $typeEvenement = "Création de compte";
             $message = "Création du compte n°$numeroCompte de type $type avec un solde initial de $solde $devise. Guichet attribué: $guichet_location";
@@ -107,21 +101,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$hist->execute()) {
                 throw new Exception("Erreur lors de l'enregistrement de l'historique.");
             }
-            
-            // Commit transaction
+
             $conn->commit();
             $success = "Compte bancaire créé avec succès. Numéro de compte: $numeroCompte. Guichet attribué: $guichet_location";
             
         } catch (Exception $e) {
-            // Rollback on error
+            
             $conn->rollback();
             $error = $e->getMessage();
         }
-        
         $conn->autocommit(TRUE);
     }
-    
-    // Close statements
+
     if (isset($verif)) $verif->close();
     if (isset($insert)) $insert->close();
     if (isset($update)) $update->close();
@@ -254,7 +245,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Client-side validation
     document.getElementById('accountForm').addEventListener('submit', function(e) {
         const solde = parseFloat(document.querySelector('input[name="solde"]').value);
         const limite = parseFloat(document.querySelector('input[name="limite_retrait"]').value);
@@ -273,7 +263,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     });
 
-    // Currency information display
     const currencyInfo = {
         'CDF': 'Devise principale de la République Démocratique du Congo',
         'BIF': 'Devise officielle du Burundi',
@@ -288,7 +277,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         info.textContent = currencyInfo[selectedCurrency] || '';
     });
 
-    // Guichet selection info
     document.getElementById('guichetSelect').addEventListener('change', function() {
         const info = document.getElementById('guichetInfo');
         if (this.value) {
@@ -299,7 +287,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     });
 
-    // Preserve form values on error
     <?php if ($error && isset($_POST['devise'])): ?>
         document.getElementById('deviseSelect').dispatchEvent(new Event('change'));
     <?php endif; ?>

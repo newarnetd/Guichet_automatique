@@ -73,12 +73,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Inscription - Guichet Automatique</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/global.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../Fonts.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon_io/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon_io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon_io/favicon-16x16.png" />
 </head>
 <body>
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="form-container p-4 shadow rounded" style="min-width: 400px; background-color: white;">
-        <h4 class="text-center mb-4">Inscription au Système</h4>
+        <h4 class="text-center mb-4 kaushan-script">Inscription au Système</h4>
         
         <?php if ($error): ?>
             <div class="alert alert-danger text-center"><?php echo $error; ?></div>
